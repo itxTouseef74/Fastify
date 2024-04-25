@@ -2,12 +2,13 @@ const fastify = require("fastify")({
     logger: true,
     ignoreTrailingSlash: true
 })
-
+const userRoutes =  require ('./userRoutes.js')
 // Method to register routes , plugins , etc 
+fastify.register(require('@fastify/cors'));
 
 fastify.register(require('./our-db-connector.js'))
 fastify.register(require('./our-first-route'))
-fastify.register(require('./userRoutes.js'))
+fastify.register(userRoutes)
 
 fastify.get('/' , function (request , reply) {
     reply.send({hello:'world'})
